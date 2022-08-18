@@ -21,18 +21,13 @@
         - ansible_os_family in ["Debian"]
         - reboot_required_file.stat.exists == true
 
-    - name: Instal yum-utils
-      yum:
-        name: "yum-utils"
-      when: ansible_os_family in ["RedHat"]
-
     - name: Update RHEL
       yum:
         name: "*"
       when: ansible_os_family in ["RedHat"]
 
     - name: Register reboot status RHEL
-      shell: "needs-restarting -r"
+      shell: "dnf needs-restarting -r"
       register: rebooting
       when: ansible_os_family in ["RedHat"]
 
