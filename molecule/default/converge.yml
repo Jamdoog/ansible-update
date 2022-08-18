@@ -18,8 +18,8 @@
     - name: Reboot if required
       reboot:
       when: 
-        - reboot_required_file.stat.exists == true
         - ansible_os_family in ["Debian"]
+        - reboot_required_file.stat.exists == true
 
     - name: Instal yum-utils
       yum:
