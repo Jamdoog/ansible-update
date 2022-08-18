@@ -26,7 +26,7 @@
       when: ansible_os_family in ["RedHat"]
 
     - name: Update Zypper
-      zypper:
+      community.general.zypper:
         name: "*"
       when: ansible_os_family in ["Suse"]
 
