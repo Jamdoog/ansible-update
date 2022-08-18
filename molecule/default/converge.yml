@@ -22,8 +22,9 @@
         - reboot_required_file.stat.exists == true
 
     - name: Update RHEL
-      yum:
+      dnf:
         name: "*"
+        state: latest
       when: ansible_os_family in ["RedHat"]
 
     - name: Register reboot status RHEL
