@@ -30,6 +30,7 @@
     - name: Register reboot status RHEL
       shell: "dnf needs-restarting -r"
       register: rebooting
+      ignore_errors: yes
       when: ansible_os_family in ["RedHat"]
 
     - name: Reboot if required RHEL
