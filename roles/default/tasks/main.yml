@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: key
+  hosts: all
   tasks:
     - name: Update APT
       apt:
