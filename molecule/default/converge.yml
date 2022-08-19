@@ -33,6 +33,12 @@
         state: latest
       when: ansible_os_family in ["Suse"]
 
+    - name: Install lsof for reboot check
+      community.general.zypper:
+        name: "lsof"
+        state: latest
+      when: ansible_os_family in ["Suse"]
+
     - name: Register reboot status RHEL
       shell: "dnf needs-restarting -r"
       register: rebooting
