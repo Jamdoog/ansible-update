@@ -27,6 +27,12 @@
         state: latest
       when: ansible_os_family in ["RedHat"]
 
+    - name: Update SUSE
+      community.general.zypper:
+        name: "*"
+        state: latest
+      when: ansible_os_family in ["Suse"]
+
     - name: Register reboot status RHEL
       shell: "dnf needs-restarting -r"
       register: rebooting
@@ -39,7 +45,16 @@
         - ansible_os_family in ["RedHat"]
         - rebooting is failed
     
+    - name: Register reboot status SUSE
+      shell: "zypper ps -s"
+      register: rebootingSUSE
+      when: ansible_os_family in ["Suse"]
 
+    - name: Reboot if required SUSE
+      reboot:
+      when:
+        - ansible_os_family in ["Suse"]
+        - not rebootingSUSE.stdout is search("Reboot is probably not necessary")
 
   
       
