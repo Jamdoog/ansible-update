@@ -6,7 +6,7 @@
     - name: Update APT
       apt:
         update_cache: yes
-        upgrade: full
+        upgrade: safe
         autoremove: yes
       when: ansible_os_family in ["Debian"]
     
