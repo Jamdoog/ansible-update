@@ -3,6 +3,11 @@
   hosts: all
   become: true
   tasks:
+    - name: Remove APT cache
+      file:
+        path: /var/cache/apt
+        state: absent
+
     - name: Update APT
       apt:
         update_cache: yes
