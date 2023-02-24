@@ -43,6 +43,14 @@
         state: latest
       when: ansible_os_family in ["Suse"]
 
+    - name: Update Arch
+      community.general.pacman:
+        name: "*"
+        state: latest
+        update_cache: yes
+        upgrade: yes
+      when: ansible_os_family in ["Archlinux"]
+
     - name: Install lsof for reboot check
       community.general.zypper:
         name: "lsof"
@@ -79,7 +87,6 @@
         - not rebootingSUSE.stdout is search("Reboot is probably not necessary")
       tags: 
         - reboot
-
   
       
 
