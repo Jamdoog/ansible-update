@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: Updates
   become: true
   tasks:
     - name: Remove APT cache
@@ -34,6 +34,7 @@
     - name: Update RHEL
       dnf:
         name: "*"
+        exclude: mariadb*
         state: latest
       when: ansible_os_family in ["RedHat"]
 
