@@ -1,5 +1,5 @@
 ---
-- name: Converge
+- name: Update Linux systems
   hosts: Updates
   become: true
   tasks:
@@ -7,6 +7,7 @@
       file:
         path: /var/cache/apt
         state: absent
+      when: ansible_os_family in ["Debian"]
 
     - name: Update APT
       apt:
@@ -34,8 +35,8 @@
     - name: Update RHEL
       dnf:
         name: "*"
-        exclude: mariadb*
         state: latest
+        update_cache: true
       when: ansible_os_family in ["RedHat"]
 
     - name: Update SUSE
